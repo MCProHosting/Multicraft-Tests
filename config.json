@@ -1,0 +1,10 @@
+{
+    "php_serve_host": "127.0.0.1",
+    "php_serve_port": 25525,
+    "php_serve_timeout": 10000,
+    "php_command": "php",
+
+    "template": {
+        "theme": "default"
+    }
+}

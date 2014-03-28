@@ -1,0 +1,28 @@
+{
+  "name": "mcph-multicraft-tests",
+  "version": "0.0.1",
+  "description": "Full-stack unit testing suite of Multicraft, suitable for theme or functional development with CI.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MCProHosting/multicraft-tests.git"
+  },
+  "keywords": [
+    "multicraft",
+    "test"
+  ],
+  "author": "Connor Peet <connor@mcprohosting.com>",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/MCProHosting/multicraft-tests/issues"
+  },
+  "homepage": "https://github.com/MCProHosting/multicraft-tests",
+  "dependencies": {
+    "zombie": "~2.0.0-alpha31",
+    "ejs": "~1.0.0",
+    "async": "~0.2.10",
+    "fs-extra": "~0.8.1",
+    "optimist": "~0.6.1",
+    "colors": "~0.6.2",
+    "wordwrap": "0.0.2"
+  }
+}
