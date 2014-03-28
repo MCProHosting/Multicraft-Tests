@@ -6,6 +6,7 @@
 var colors            = require('colors'),
     wrap              = require('wordwrap')(50),
     passed_assertions = 0,
+    failed_assertions = 0,
     tests             = [],
     message           = '',
     testing_string    = '',
@@ -14,6 +15,7 @@ var colors            = require('colors'),
 
 var assert = module.exports.assert = function (bool, fail_message) {
     if (bool !== true) {
+        failed_assertions++;
         message = fail_message;
         process.stdout.write('F');
     } else {
@@ -28,7 +30,7 @@ module.exports.assertPagegood = function (browser, page, title) {
     assert(!! browser.query('body'), 'Body didn\'t appear on ' + page);
 
     if (title) {
-        assert(browser.text('title') == 'Multicraft - ' + title);
+        assert(browser.text('title') == 'Multicraft - ' + title, 'Title incorrect on ' + page);
     }
 };
 
@@ -56,7 +58,7 @@ var runtests = module.exports.runtests = function (callback) {
 module.exports.summarize = function (callback) {
     runtests(function(success) {
         console.log('');
-        console.log((success ? 0 : 1) + '/' + (passed_assertions) + ' Assertions Failed');
+        console.log(failed_assertions + '/' + (passed_assertions + failed_assertions) + ' Assertions Failed');
     
         if (success) {
             console.log('You\'re good to deploy!'.green);
