@@ -38,7 +38,10 @@ module.exports.start = function (callback) {
 
     checker = setInterval(function () {
         isPortTaken(config('php_serve_port'), function (err, inuse) {
-            if (inuse) {
+            if (err) {
+                callback(err);
+                clearInterval(checker);
+            } else if (inuse) {
                 callback();
                 state = 'online';
                 clearInterval(checker);
