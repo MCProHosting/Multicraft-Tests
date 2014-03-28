@@ -1,10 +1,10 @@
-var lab = require('../laboratory');
+var lab    = require('../laboratory'),
+    config = require('../config_handler');
 
-var test = function (browser, next) {
-    lab.assert(browser.success, 'Homepage failed to load.');
-    browser.clickLink('Login', next);
-};
-
-module.exports = function () {
-    lab.register(test);
+module.exports = function (browser, next) {
+    lab.assertPagegood(browser, 'homepage');
+    browser.visit('http://' + config('php_serve_host') + ':' + config('php_serve_port') + '/index.php?r=site/logout', function () {
+        lab.assertPagegood(browser, 'logout page');
+        browser.clickLink('Login', next);
+    });
 };

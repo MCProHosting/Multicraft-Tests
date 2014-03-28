@@ -12,17 +12,24 @@ var colors            = require('colors'),
     config            = require('./config_handler'),
     zombie            = require('zombie');
 
-module.exports.assert = function (bool, fail_message) {
+var assert = module.exports.assert = function (bool, fail_message) {
     if (bool !== true) {
         message = fail_message;
-        testing_string += 'F';
+        process.stdout.write('F');
     } else {
         passed_assertions++;
-        testing_string += '.';
+        process.stdout.write('.');
     }
+};
 
-    process.stdout.write('\n');
-    process.stdout.write(testing_string);
+module.exports.assertPagegood = function (browser, page, title) {
+    assert(browser.success, page + 'failed to load.');
+    assert(browser.errors.length === 0, 'Browser error(s) in ' + page);
+    assert(!! browser.query('body'), 'Body didn\'t appear on ' + page);
+
+    if (title) {
+        assert(browser.text('title') == 'Multicraft - ' + title);
+    }
 };
 
 module.exports.register = function (test) {
@@ -34,6 +41,7 @@ var runtests = module.exports.runtests = function (callback) {
 
     var runNextTest = function () {
         if (message.length) {
+            console.log('');
             console.log(message.red);
             callback(false);
         } else if (tests.length) {

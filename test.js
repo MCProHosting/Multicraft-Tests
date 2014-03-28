@@ -12,10 +12,9 @@ async.series([
     server.start
 ], function (err) {
 
-    var files = fs.readdirSync('./src/tests');
-    for (var i = 0, l = files.length; i < l; i++) {
-        require('./src/tests/' + files[i].split('.').shift())();
-    }
+    lab.register(require('./src/tests/testHomePage'));
+    lab.register(require('./src/tests/testLoginPage'));
+    lab.register(require('./src/tests/testUsersPage'));
 
     if (err) {
         console.log(err.red);
