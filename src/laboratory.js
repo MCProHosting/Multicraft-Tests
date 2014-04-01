@@ -8,7 +8,7 @@ var colors            = require('colors'),
     passed_assertions = 0,
     failed_assertions = 0,
     tests             = [],
-    message           = '',
+    messages          = [],
     testing_string    = '',
     config            = require('./config_handler'),
     zombie            = require('zombie');
@@ -16,7 +16,7 @@ var colors            = require('colors'),
 var assert = module.exports.assert = function (bool, fail_message) {
     if (bool !== true) {
         failed_assertions++;
-        message = fail_message;
+        messages.push(fail_message);
         process.stdout.write('F');
     } else {
         passed_assertions++;
@@ -42,9 +42,11 @@ var runtests = module.exports.runtests = function (callback) {
     var browser = new zombie();
 
     var runNextTest = function () {
-        if (message.length) {
+        if (messages.length) {
             console.log('');
-            console.log(message.red);
+            for (var i = 0, l = messages.length; i < l; i++) {
+                console.log(messages[i].red);
+            }
             callback(false);
         } else if (tests.length) {
             (tests.shift())(browser, runNextTest);
@@ -66,6 +68,6 @@ module.exports.summarize = function (callback) {
             console.log('Ya done derped!'.red);
         }
 
-        callback();
+        callback(success);
     });
 };
