@@ -32,8 +32,15 @@ Ensure that you're running a reasonably modern version of Node.js, with the NPM 
 
 #### Local Readying...
 
- 1. Run `npm-install` while cd'd into this repo's directory.
+ 1. Run `npm install` while cd'd into this repo's directory.
  2. Clone your panel into the "panel" directory by running `git clone <panel .git> panel`
+
+Additionally, there is an option to run custom scripts. If a `setup/setup.sh`, `setup/setup.bat`, and/or `setup/setup.js` is present, they will be executed. Note that these are run in parallel to the config and database mirroring - don't assume that they will be present before your script being executed.
+
+ * Shell scripts will run on Unix/Linux based systems only, and they are run with the current working directory set to the panel's directory.
+ * Batch scripts will run on Windows only, and are run with the current working directory set to the panel's directory.
+ * Javascript files will run on all systems, and are therefore recommended. It is expected that they will export a single function, which multicraft-tests then calls with the first argument being the panel directory, and the second argument being a callback to execute when complete.
+
 
 ### Running Tests
 
