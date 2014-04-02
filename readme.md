@@ -39,13 +39,13 @@ Ensure that you're running a reasonably modern version of Node.js, with the NPM 
 
 Run, from the command line:
 
-```
+```bash
 node test.js
 ```
 
 This will run a full suite of tests against the panel. It'll take about a minute, especially after it hits the individual servers page. Hopefully you'll see something like this:
 
-```
+```bash
 Connors-MacBook-Air:mcph-multicraft-tests connor$ node test.js
 
 ................................................................................................................................................................
@@ -56,7 +56,7 @@ If you don't, that means something is wrong! Most tests involve ensuring that a 
 
 In order to update the panel after you make changes and push it into version control, simply:
 
-```
+```bash
 cd panel && git pull
 ```
 
